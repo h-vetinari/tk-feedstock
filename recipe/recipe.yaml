@@ -22,6 +22,8 @@ source:
 build:
   number: ${{ build + 100 if tk_variant == 'noxft' and linux else build }}
   string: ${{ string_prefix }}h${{ hash }}_${{ build }}
+  # TODO: remove this once we build native tk-9
+  skip: build_platform != target_platform and win
   variant:
     use_keys:
       - tk_variant
