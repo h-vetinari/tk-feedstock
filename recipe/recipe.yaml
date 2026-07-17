@@ -116,6 +116,14 @@ tests:
         then:
           - tclsh${{ maj_min_nodot }} hello.tcl
           - wish${{ maj_min_nodot }} hello.tcl
+    requirements:
+      run:
+        - if: linux
+          then: xorg-libx11
+        - if: linux and tk_variant == "xft"
+          then:
+            - xorg-libxft
+            - fontconfig
     files:
       recipe:
         - hello.tcl
