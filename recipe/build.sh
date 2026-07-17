@@ -4,12 +4,19 @@ set -ex
 
 IFS="." read -a VER_ARR <<<"${PKG_VERSION}"
 
-
 pushd tcl${PKG_VERSION}/unix
   # autoreconf -vfi
-  ./configure  --prefix="${PREFIX}"
-  make -j${CPU_COUNT} ${VERBOSE_AT}
-  make install install-private-headers
+  # build and install a native interpreter first
+  mkdir native
+  cd native
+  ../configure --prefix="${BUILD_PREFIX}" --host="${BUILD}" \
+    CC="${CC_FOR_BUILD}" CFLAGS="-O3 -isystem ${BUILD_PREFIX}/include"
+  make -j${CPU_COUNT} ${VERBOSE_AT} install-binaries install-libraries
+  cd ..
+
+  # build the actual package
+  ./configure --prefix="${PREFIX}"
+  make -j${CPU_COUNT} ${VERBOSE_AT} install install-private-headers
 popd
 
 if [[ "$target_platform" == osx-* ]]; then
