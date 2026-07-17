@@ -74,8 +74,6 @@ requirements:
           - fontconfig
 
 tests:
-  # Library naming note: "t" suffix means "full thread support" in Windows
-  #    https://sourceforge.net/p/tcl/mailman/tcl-bugs/thread/From_noreply@sourceforge.net_Mon_Jul_23_11:46:16_2012/
   - package_contents:
       bin:
         - tclsh
@@ -101,23 +99,23 @@ tests:
         - if: unix
           then:
             - tcl${{ maj_min }}
-            - tk${{ maj_min }}
+            - tcl${{ major }}tk${{ maj_min }}
         - if: win
           then:
-            - tcl${{ maj_min_nodot }}t
-            - tk${{ maj_min_nodot }}t
+            - tcl${{ maj_min_nodot }}
+            - tcl${{ major }}tk${{ maj_min_nodot }}
       files:
         # static and import libraries (not handled by `lib`)
         - if: unix
           then:
-            - lib/libtclstub${{ maj_min }}.a
-            - lib/libtkstub${{ maj_min }}.a
+            - lib/libtclstub.a
+            - lib/libtkstub.a
         - if: win
           then:
-            - Library/lib/tcl${{ maj_min_nodot }}t.lib
-            - Library/lib/tk${{ maj_min_nodot }}t.lib
-            - Library/lib/tclstub${{ maj_min_nodot }}.lib
-            - Library/lib/tkstub${{ maj_min_nodot }}.lib
+            - Library/lib/tcl${{ maj_min_nodot }}.lib
+            - Library/lib/tcl${{ major }}tk${{ maj_min_nodot }}.lib
+            - Library/lib/tclstub.lib
+            - Library/lib/tkstub.lib
 
   - script:
       # Check commands work and run a simple program.
@@ -130,7 +128,7 @@ tests:
       - if: win
         then:
           - tclsh${{ maj_min_nodot }} hello.tcl
-          - wish${{ maj_min_nodot }}t hello.tcl
+          - wish${{ maj_min_nodot }} hello.tcl
     files:
       recipe:
         - hello.tcl
