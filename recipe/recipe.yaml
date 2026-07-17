@@ -34,7 +34,9 @@ requirements:
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - if: unix
-      then: make
+      then:
+        - make
+        - zip
     - if: linux and tk_variant == "xft"
       then: pkg-config
     - if: build_platform != target_platform
