@@ -2,8 +2,7 @@ context:
   version: "9.0.4"
   major: ${{ version | split(".") | first }}
   minor: ${{ (version | split("."))[1] }}
-  maj_min: ${{ major }}.${{ minor }}
-  maj_min_nodot: ${{ major }}${{ minor }}
+  maj_min: ${{ major }}${{ '.' if unix }}${{ minor }}
   build: 0
   # the variant prefix is only used in the build string on linux
   string_prefix: ${{ (tk_variant | default("")) + "_" if (linux | default(false)) else "" }}
@@ -78,14 +77,8 @@ tests:
       bin:
         - tclsh
         - wish
-        - if: unix
-          then:
-            - tclsh${{ maj_min }}
-            - wish${{ maj_min }}
-        - if: win
-          then:
-            - tclsh${{ maj_min_nodot }}
-            - wish${{ maj_min_nodot }}
+        - tclsh${{ maj_min }}
+        - wish${{ maj_min }}
       include:
         - tcl.h
         - tclDecls.h
@@ -96,14 +89,8 @@ tests:
         - tkDecls.h
         - tkPlatDecls.h
       lib:
-        - if: unix
-          then:
-            - tcl${{ maj_min }}
-            - tcl${{ major }}tk${{ maj_min }}
-        - if: win
-          then:
-            - tcl${{ maj_min_nodot }}
-            - tcl${{ major }}tk${{ maj_min_nodot }}
+        - tcl${{ maj_min }}
+        - tcl${{ major }}tk${{ maj_min }}
       files:
         # static and import libraries (not handled by `lib`)
         - if: unix
@@ -112,8 +99,8 @@ tests:
             - lib/libtkstub.a
         - if: win
           then:
-            - Library/lib/tcl${{ maj_min_nodot }}.lib
-            - Library/lib/tcl${{ major }}tk${{ maj_min_nodot }}.lib
+            - Library/lib/tcl${{ maj_min }}.lib
+            - Library/lib/tcl${{ major }}tk${{ maj_min }}.lib
             - Library/lib/tclstub.lib
             - Library/lib/tkstub.lib
 
@@ -121,10 +108,8 @@ tests:
       # Check commands work and run a simple program.
       - tclsh hello.tcl
       - wish hello.tcl
-      - if: unix
-        then:
-          - tclsh${{ maj_min }} hello.tcl
-          - wish${{ maj_min }} hello.tcl
+      - tclsh${{ maj_min }} hello.tcl
+      - wish${{ maj_min }} hello.tcl
       - if: win
         then:
           - tclsh${{ maj_min_nodot }} hello.tcl
