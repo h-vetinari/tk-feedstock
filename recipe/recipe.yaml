@@ -38,8 +38,8 @@ requirements:
         - zip
     - if: linux and tk_variant == "xft"
       then: pkg-config
-    - if: build_platform != target_platform
-      then: tk
+    - if: build_platform != target_platform and win
+      then: tk >=9
   host:
     - if: unix
       then: zlib
