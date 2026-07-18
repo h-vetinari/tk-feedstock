@@ -4,6 +4,7 @@ context:
   minor: ${{ (version | split("."))[1] }}
   maj_min: ${{ major }}${{ '.' if unix }}${{ minor }}
   build: 0
+  tk_build: ${{ build + 100 if tk_variant == 'noxft' and linux else build }}
   # the variant prefix is only used in the build string on linux
   string_prefix: ${{ (tk_variant | default("")) + "_" if (linux | default(false)) else "" }}
 
@@ -20,8 +21,8 @@ source:
     sha256: d7a146d2917eb8b5cc95276dbf0e3d03c7464d2b19c1675357857c989301dbb4
 
 build:
-  number: ${{ build + 100 if tk_variant == 'noxft' and linux else build }}
-  string: ${{ string_prefix }}h${{ hash }}_${{ build }}
+  number: ${{ tk_build }}
+  string: ${{ string_prefix }}h${{ hash }}_${{ tk_build }}
   # TODO: remove this once we build native tk-9
   skip: build_platform != target_platform and win
   variant:
