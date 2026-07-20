@@ -49,7 +49,9 @@ outputs:
           then: tcl >=9
       host:
         - if: unix
-          then: zlib
+          then:
+            - libtommath
+            - zlib
         - if: linux
           then:
             - xorg-xorgproto

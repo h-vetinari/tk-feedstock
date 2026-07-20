@@ -13,7 +13,7 @@ pushd tcl${PKG_VERSION}/unix
   cd ..
 
   # build the actual package
-  ./configure --prefix="${PREFIX}"
+  ./configure --prefix="${PREFIX}" --with-system-libtommath
   make -j${CPU_COUNT} ${VERBOSE_AT}
 popd
 
