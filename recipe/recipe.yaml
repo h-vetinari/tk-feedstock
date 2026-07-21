@@ -47,10 +47,8 @@ outputs:
         - if: build_platform != target_platform and win
           then: tcl >=9
       host:
-        - if: unix
-          then:
-            - libtommath
-            - zlib
+        - libtommath
+        - zlib
         - if: linux
           then:
             - xorg-xorgproto
@@ -237,6 +235,10 @@ outputs:
         files:
           recipe:
             - hello.tcl
+        requirements:
+          run:
+            - if: linux
+              then: xorg-libx11
 
   - package:
       name: libtk-devel
