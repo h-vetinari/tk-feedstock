@@ -74,12 +74,15 @@ outputs:
           - lib/libtcl*.dylib
           - Library/bin/tcl*.dll
           - Library/lib/tcl*
+          # TODO: remove this
+          - Library/bin/zlib1.dll
         exclude:
           - lib/tcl*/*.sh
           - lib/pkgconfig
           - lib/libtcl*tk*
           - Library/lib/tcl*/*.sh
           - Library/lib/pkgconfig
+          - Library/bin/tcl*tk*.dll
     requirements:
       run_constraints:
         - tk ${{ version }}.*
