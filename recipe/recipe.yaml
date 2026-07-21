@@ -82,6 +82,9 @@ outputs:
           - lib/libtcl*tk*
           - Library/lib/tcl*/*.sh
           - Library/lib/pkgconfig
+    requirements:
+      run_constrained:
+        - tk ${{ version }}.*
     tests:
       - package_contents:
           lib:
@@ -99,6 +102,8 @@ outputs:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
       run:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
+      run_constrained:
+        - tk ${{ version }}.*
     tests:
       - package_contents:
           bin:
@@ -127,6 +132,8 @@ outputs:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
       run:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
+      run_constrained:
+        - tk ${{ version }}.*
     build:
       files:
         include:
@@ -181,9 +188,16 @@ outputs:
         down_prioritize_variant: ${{ 1 if (tk_variant | default("")) == "xft" else 0 }}
     requirements:
       host:
-        - ${{ pin_subpackage('tcl', upper_bound='x.x.x') }}
+        - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
+        - if: linux and tk_variant == "xft"
+          then:
+            - xorg-libxft
+            - fontconfig
+            - expat
       run:
-        - ${{ pin_subpackage('tcl', upper_bound='x.x.x') }}
+        - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
+      run_constrained:
+        - tk ${{ version }}.*
     tests:
       - package_contents:
           lib:
@@ -252,6 +266,8 @@ outputs:
         - ${{ pin_subpackage('libtk', upper_bound='x.x.x') }}
       run:
         - ${{ pin_subpackage('libtk', upper_bound='x.x.x') }}
+      run_constrained:
+        - tk ${{ version }}.*
     tests:
       - package_contents:
           files:
