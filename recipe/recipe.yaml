@@ -83,7 +83,7 @@ outputs:
           - Library/lib/tcl*/*.sh
           - Library/lib/pkgconfig
     requirements:
-      run_constrained:
+      run_constraints:
         - tk ${{ version }}.*
     tests:
       - package_contents:
@@ -102,7 +102,7 @@ outputs:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
       run:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
-      run_constrained:
+      run_constraints:
         - tk ${{ version }}.*
     tests:
       - package_contents:
@@ -132,7 +132,7 @@ outputs:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
       run:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
-      run_constrained:
+      run_constraints:
         - tk ${{ version }}.*
     build:
       files:
@@ -196,7 +196,7 @@ outputs:
             - expat
       run:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
-      run_constrained:
+      run_constraints:
         - tk ${{ version }}.*
     tests:
       - package_contents:
@@ -266,7 +266,7 @@ outputs:
         - ${{ pin_subpackage('libtk', upper_bound='x.x.x') }}
       run:
         - ${{ pin_subpackage('libtk', upper_bound='x.x.x') }}
-      run_constrained:
+      run_constraints:
         - tk ${{ version }}.*
     tests:
       - package_contents:
