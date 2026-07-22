@@ -74,5 +74,5 @@ copy %LIBRARY_PREFIX%\bin\wish%MAJ_MIN%.exe %LIBRARY_PREFIX%\bin\wish.exe
 if %ERRORLEVEL% GTR 0 exit 1
 popd
 
-dir %LIBRARY_PREFIX%\lib
-dir %LIBRARY_PREFIX%\bin
+dir /s %LIBRARY_PREFIX%\lib
+dir /s %LIBRARY_PREFIX%\bin
