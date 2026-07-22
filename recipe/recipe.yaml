@@ -216,7 +216,11 @@ outputs:
     tests:
       - package_contents:
           lib:
-            - tcl${{ major }}tk${{ maj_min }}
+            - if: unix
+              then: tcl${{ major }}tk${{ maj_min }}
+          files:
+            - if: win
+              then: Library/bin/tcl${{ major }}tk${{ maj_min }}.dll
 
   - package:
       name: tk
