@@ -47,7 +47,8 @@ outputs:
         - if: build_platform != target_platform and win
           then: tcl >=9
       host:
-        - libtommath
+        - if: unix
+          then: libtommath
         - zlib
         - if: linux
           then:
@@ -76,6 +77,7 @@ outputs:
           - Library/lib/tcl*
           # TODO: remove this
           - Library/bin/zlib1.dll
+          - Library/bin/libtommath.dll
         exclude:
           - lib/tcl*/*.sh
           - lib/pkgconfig
