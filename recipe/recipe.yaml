@@ -113,6 +113,8 @@ outputs:
     requirements:
       host:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
+        - if: linux
+          then: xorg-libx11
       run:
         - ${{ pin_subpackage('libtcl', upper_bound='x.x.x') }}
       run_constraints:
@@ -239,6 +241,8 @@ outputs:
     requirements:
       host:
         - ${{ pin_subpackage('libtk', upper_bound='x.x.x') }}
+        - if: linux
+          then: xorg-libx11
       run:
         - ${{ pin_subpackage('libtk', upper_bound='x.x.x') }}
     tests:
