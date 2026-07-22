@@ -42,7 +42,7 @@ setlocal EnableDelayedExpansion
 endlocal
 nmake -f makefile.vc INSTALLDIR=%LIBRARY_PREFIX% %TCLSH_NATIVE% MACHINE=%MACHINE% release
 if %ERRORLEVEL% GTR 0 exit 1
-nmake -f makefile.vc INSTALLDIR=%LIBRARY_PREFIX% %TCLSH_NATIVE% MACHINE=%MACHINE% install
+nmake -f makefile.vc INSTALLDIR=%LIBRARY_PREFIX% %TCLSH_NATIVE% MACHINE=%MACHINE% install install-libraries
 if %ERRORLEVEL% GTR 0 exit 1
 popd
 

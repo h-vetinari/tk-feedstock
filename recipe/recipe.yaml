@@ -70,11 +70,15 @@ outputs:
     build:
       files:
         include:
-          - lib/tcl*
+          - lib/tcl${{ major }}
+          - lib/tcl${{ maj_min }}
           - lib/libtcl*.so
           - lib/libtcl*.dylib
           - Library/bin/tcl*.dll
-          - Library/lib/tcl*
+          - Library/lib/tcl${{ major }}
+          - Library/lib/tcl${{ maj_min }}
+          - Library/lib/dde*
+          - Library/lib/registry*
           # TODO: remove this
           - Library/bin/zlib1.dll
           - Library/bin/libtommath.dll
