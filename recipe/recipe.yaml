@@ -71,12 +71,12 @@ outputs:
       files:
         include:
           - lib/tcl${{ major }}
-          - lib/tcl${{ maj_min }}
+          - lib/tcl${{ major }}.${{ minor }}
           - lib/libtcl*.so
           - lib/libtcl*.dylib
           - Library/bin/tcl*.dll
           - Library/lib/tcl${{ major }}
-          - Library/lib/tcl${{ maj_min }}
+          - Library/lib/tcl${{ major }}.${{ minor }}
           - Library/lib/dde*
           - Library/lib/registry*
           # TODO: remove this
@@ -87,6 +87,7 @@ outputs:
           - lib/pkgconfig
           - lib/libtcl*tk*
           - Library/lib/tcl*/*.sh
+          - Library/lib/tcl*.sh
           - Library/lib/pkgconfig
           - Library/bin/tcl*tk*.dll
     requirements:
@@ -95,7 +96,12 @@ outputs:
     tests:
       - package_contents:
           lib:
-            - tcl${{ maj_min }}
+            - if: unix
+              then: tcl${{ maj_min }}
+          files:
+            - if: win
+              then:
+                - Library/bin/tcl${{ maj_min }}.dll
 
   - package:
       name: tcl
@@ -151,6 +157,7 @@ outputs:
           - lib/libtcl*.a
           - Library/include/tcl-private
           - Library/include/tcl*
+          - Library/lib/tcl*.sh
           - Library/lib/tcl*/*.sh
           - Library/lib/pkgconfig/tcl*
           - Library/lib/tcl*.lib
@@ -184,6 +191,7 @@ outputs:
           - lib/libtcl*tk*.so
           - lib/libtcl*tk*.dylib
           - Library/bin/tk*.dll
+          - Library/lib/tk${{ major }}.${{ minor }}
         exclude:
           - lib/tk*/*.sh
       number: ${{ tk_build }}
