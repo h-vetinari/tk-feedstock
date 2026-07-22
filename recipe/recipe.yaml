@@ -190,7 +190,7 @@ outputs:
           - lib/tk*
           - lib/libtcl*tk*.so
           - lib/libtcl*tk*.dylib
-          - Library/bin/tk*.dll
+          - Library/bin/tcl*tk*.dll
           - Library/lib/tk${{ major }}.${{ minor }}
         exclude:
           - lib/tk*/*.sh
