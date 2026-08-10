@@ -10,3 +10,5 @@ target_platform:
 - win-arm64
 tk_variant:
 - noxft
+zlib:
+- '1'

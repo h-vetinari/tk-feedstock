@@ -1,5 +1,5 @@
-About tk-feedstock
-==================
+About libtcl-feedstock
+======================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/tk-feedstock/blob/main/LICENSE.txt)
 
@@ -49,13 +49,6 @@ Current build status
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tk-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
                 </a>
               </td>
-            </tr><tr>
-              <td>win_64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=2081&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tk-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
-                </a>
-              </td>
             </tr>
           </tbody>
         </table>
@@ -69,54 +62,103 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libtcl-green.svg)](https://anaconda.org/conda-forge/libtcl) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libtcl.svg)](https://anaconda.org/conda-forge/libtcl) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libtcl.svg)](https://anaconda.org/conda-forge/libtcl) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libtcl.svg)](https://anaconda.org/conda-forge/libtcl) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libtcl--devel-green.svg)](https://anaconda.org/conda-forge/libtcl-devel) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libtcl-devel.svg)](https://anaconda.org/conda-forge/libtcl-devel) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libtcl-devel.svg)](https://anaconda.org/conda-forge/libtcl-devel) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libtcl-devel.svg)](https://anaconda.org/conda-forge/libtcl-devel) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libtk-green.svg)](https://anaconda.org/conda-forge/libtk) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libtk.svg)](https://anaconda.org/conda-forge/libtk) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libtk.svg)](https://anaconda.org/conda-forge/libtk) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libtk.svg)](https://anaconda.org/conda-forge/libtk) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libtk--devel-green.svg)](https://anaconda.org/conda-forge/libtk-devel) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libtk-devel.svg)](https://anaconda.org/conda-forge/libtk-devel) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libtk-devel.svg)](https://anaconda.org/conda-forge/libtk-devel) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libtk-devel.svg)](https://anaconda.org/conda-forge/libtk-devel) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-tcl-green.svg)](https://anaconda.org/conda-forge/tcl) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/tcl.svg)](https://anaconda.org/conda-forge/tcl) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/tcl.svg)](https://anaconda.org/conda-forge/tcl) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/tcl.svg)](https://anaconda.org/conda-forge/tcl) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-tk-green.svg)](https://anaconda.org/conda-forge/tk) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/tk.svg)](https://anaconda.org/conda-forge/tk) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/tk.svg)](https://anaconda.org/conda-forge/tk) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/tk.svg)](https://anaconda.org/conda-forge/tk) |
 
-Installing tk
-=============
+Installing libtcl
+=================
 
-Installing `tk` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `libtcl` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `tk` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
-conda install tk
+conda install libtcl libtcl-devel libtk libtk-devel tcl tk
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
-mamba install tk
+mamba install libtcl libtcl-devel libtk libtk-devel tcl tk
 ```
 
-It is possible to list all of the versions of `tk` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
 
 ```
-conda search tk --channel conda-forge
+# for adding to your local project
+pixi add libtcl libtcl-devel libtk libtk-devel tcl tk
+# for installing globally
+pixi global install libtcl libtcl-devel libtk libtk-devel tcl tk
 ```
 
-or with `mamba`:
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `libtcl` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
-mamba search tk --channel conda-forge
+conda search libtcl --channel conda-forge
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With mamba</summary>
+
+```
+mamba search libtcl --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search libtcl --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search tk --channel conda-forge
+mamba repoquery search libtcl --channel conda-forge
 
-# List packages depending on `tk`:
-mamba repoquery whoneeds tk --channel conda-forge
+# List packages depending on `libtcl`:
+mamba repoquery whoneeds libtcl --channel conda-forge
 
-# List dependencies of `tk`:
-mamba repoquery depends tk --channel conda-forge
+# List dependencies of `libtcl`:
+mamba repoquery depends libtcl --channel conda-forge
 ```
+
+</details>
 
 
 About conda-forge
@@ -160,17 +202,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating tk-feedstock
-=====================
+Updating libtcl-feedstock
+=========================
 
-If you would like to improve the tk recipe or build a new
+If you would like to improve the libtcl recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/tk-feedstock are
+Note that all branches in the conda-forge/libtcl-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks, and branches in the main repository should only be used to
 build distinct package versions.
