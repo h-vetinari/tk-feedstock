@@ -16,6 +16,9 @@ source:
   - url: https://downloads.sourceforge.net/tcl/tcl${{ version }}-src.tar.gz
     target_directory: tcl${{ version }}
     sha256: d0aed49230bc02a65c1e0229e65f34590a4b037ec40d546f32573b467f7551ea
+    patches:
+      # link against system libraries on Windows
+      - patches/win-system-libs.patch
 
   - url: https://downloads.sourceforge.net/tcl/tk${{ version }}-src.tar.gz
     target_directory: tk${{ version }}
