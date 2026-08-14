@@ -1,0 +1,44 @@
+diff --git a/win/makefile.vc b/win/makefile.vc
+index c051dd5..a328792 100644
+--- a/win/makefile.vc
++++ b/win/makefile.vc
+@@ -452,7 +452,7 @@ PLATFORMOBJS = \
+ 	$(TMP_DIR)\tcl.res
+ !endif
+ 
+-TCLOBJS = $(COREOBJS) $(ZLIBOBJS) $(TOMMATHOBJS) $(PLATFORMOBJS)
++TCLOBJS = $(COREOBJS) $(PLATFORMOBJS)
+ 
+ TCLSTUBOBJS = \
+ 	$(TMP_DIR)\tclStubLib.obj \
+@@ -535,7 +535,7 @@ shell:      libtclzip
+ 	@$(COPY) /b "$(TCLSHRAW)"+"$(TCLSCRIPTZIP)" "$(TCLSH)"
+ !endif
+ 
+-dlls:	    setup $(TCLREGLIB) $(TCLDDELIB) $(OUT_DIR)\zlib1.dll $(OUT_DIR)\libtommath.dll
++dlls:	    setup $(TCLREGLIB) $(TCLDDELIB)
+ libtclzip:  $(TCLSCRIPTZIP)
+ 
+ tcltest:    setup core $(TCLTEST) dlls
+@@ -583,7 +583,7 @@ $**
+ !else
+ 
+ $(TCLLIB): $(TCLOBJS)
+-	$(DLLCMD) @<<
++	$(DLLCMD) @<< zdll.lib tommath.lib
+ $**
+ <<
+ 	$(_VC_MANIFEST_EMBED_DLL)
+@@ -1056,12 +1056,6 @@ install-binaries:
+ 	@$(CPY) "$(TCLLIB)" "$(BIN_INSTALL_DIR)\"
+ !endif
+ 	@$(CPY) "$(TCLIMPLIB)" "$(LIB_INSTALL_DIR)\"
+-	@$(CPY) "$(OUT_DIR)\zlib1.dll" "$(BIN_INSTALL_DIR)\"
+-	@$(CPY) "$(OUT_DIR)\libtommath.dll" "$(BIN_INSTALL_DIR)\"
+-!if !$(STATIC_BUILD)
+-	@$(CPY) "$(OUT_DIR)\zdll.lib" "$(LIB_INSTALL_DIR)\"
+-	@$(CPY) "$(OUT_DIR)\tommath.lib" "$(LIB_INSTALL_DIR)\"
+-!endif
+ 	@echo Installing $(TCLSHNAME)
+ 	@$(CPY) "$(TCLSH)" "$(BIN_INSTALL_DIR)\"
+ 	@echo Installing $(TCLSTUBLIBNAME)

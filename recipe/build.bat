@@ -19,6 +19,8 @@ if NOT "%target_platform%"=="%build_platform%" (
   set "TCLSH_NATIVE=TCLSH_NATIVE=%BUILD_PREFIX%\Library\bin\tclsh86.exe"
 )
 
+rmdir /s /q "tcl%PKG_VERSION%\pkgs"
+
 pushd tcl%PKG_VERSION%\win
 setlocal EnableDelayedExpansion
   if NOT "%target_platform%"=="%build_platform%" (
@@ -29,17 +31,18 @@ setlocal EnableDelayedExpansion
   )
   %CC% nmakehlp.c
   nmakehlp.exe --help
-  for /r "%SRC_DIR%\tcl%PKG_VERSION%\pkgs" %%d in (.) do (
-    if exist "%%d\nmakehlp.c" (
-      pushd "%%d"
-        %CC% nmakehlp.c
-        nmakehlp.exe --help
-      popd
-    )
-  )
+  REM for /r "%SRC_DIR%\tcl%PKG_VERSION%\pkgs" %%d in (.) do (
+  REM   if exist "%%d\nmakehlp.c" (
+  REM     pushd "%%d"
+  REM       %CC% nmakehlp.c
+  REM       nmakehlp.exe --help
+  REM     popd
+  REM   )
+  REM )
 endlocal
 nmake -f makefile.vc INSTALLDIR=%LIBRARY_PREFIX% %TCLSH_NATIVE% MACHINE=%MACHINE% release
-nmake -f makefile.vc INSTALLDIR=%LIBRARY_PREFIX% %TCLSH_NATIVE% MACHINE=%MACHINE% install
+if %ERRORLEVEL% GTR 0 exit 1
+nmake -f makefile.vc INSTALLDIR=%LIBRARY_PREFIX% %TCLSH_NATIVE% MACHINE=%MACHINE% install install-libraries
 if %ERRORLEVEL% GTR 0 exit 1
 popd
 
@@ -57,14 +60,19 @@ setlocal EnableDelayedExpansion
   nmakehlp.exe --help
 endlocal
 nmake -f makefile.vc INSTALLDIR=%LIBRARY_PREFIX% %TCLSH_NATIVE% MACHINE=%MACHINE% TCLDIR=..\..\tcl%PKG_VERSION% release
+if %ERRORLEVEL% GTR 0 exit 1
 nmake -f makefile.vc INSTALLDIR=%LIBRARY_PREFIX% %TCLSH_NATIVE% MACHINE=%MACHINE% TCLDIR=..\..\tcl%PKG_VERSION% install
 if %ERRORLEVEL% GTR 0 exit 1
 
-:: Make sure that `wish` can be called without the version info.
-copy %LIBRARY_PREFIX%\bin\wish86t.exe %LIBRARY_PREFIX%\bin\wish.exe
-copy %LIBRARY_PREFIX%\bin\tclsh86t.exe %LIBRARY_PREFIX%\bin\tclsh.exe
+set VERSION_NODOT=%PKG_VERSION:.=%
+set MAJ_MIN=%VERSION_NODOT:~0,2%
 
-:: No `t` version of wish86.exe
-copy %LIBRARY_PREFIX%\bin\wish86t.exe %LIBRARY_PREFIX%\bin\wish86.exe
-copy %LIBRARY_PREFIX%\bin\tclsh86t.exe %LIBRARY_PREFIX%\bin\tclsh86.exe
+:: Make sure that `tclsh` can be called without the version info.
+copy %LIBRARY_PREFIX%\bin\tclsh%MAJ_MIN%.exe %LIBRARY_PREFIX%\bin\tclsh.exe
+if %ERRORLEVEL% GTR 0 exit 1
+copy %LIBRARY_PREFIX%\bin\wish%MAJ_MIN%.exe %LIBRARY_PREFIX%\bin\wish.exe
+if %ERRORLEVEL% GTR 0 exit 1
 popd
+
+dir /s %LIBRARY_PREFIX%\lib
+dir /s %LIBRARY_PREFIX%\bin
